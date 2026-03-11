@@ -14,7 +14,12 @@ class PBBPage extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
-        leading: const Icon(Icons.arrow_back),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
 
       body: Padding(
@@ -89,115 +94,124 @@ class PBBCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade300),
-        color: Colors.white,
-      ),
-      child: Column(
-        children: [
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/detail');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey.shade300),
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
 
-          // HEADER STATUS
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(10),
+            // HEADER STATUS
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(10),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    year,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      color: statusColor,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      status,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  year,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: statusColor,
-                    borderRadius: BorderRadius.circular(4),
+
+            // BODY
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                children: [
+
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on_outlined, size: 16),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          address,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      )
+                    ],
                   ),
-                  child: Text(
-                    status,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
 
-          // BODY
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: [
+                  const SizedBox(height: 8),
 
-                Row(
-                  children: [
-                    const Icon(Icons.location_on_outlined, size: 16),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        address,
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    )
-                  ],
-                ),
-
-                const SizedBox(height: 8),
-
-                Row(
-                  children: [
-                    const Icon(Icons.info_outline, size: 16),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        object,
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0B4C8C),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        price,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
+                  Row(
+                    children: [
+                      const Icon(Icons.info_outline, size: 16),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          object,
+                          style: const TextStyle(fontSize: 12),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0B4C8C),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          price,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
 
-                const SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      "Lihat Detail",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Icon(Icons.arrow_forward_ios, size: 14)
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Lihat Detail",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      Icon(Icons.arrow_forward_ios, size: 14)
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
